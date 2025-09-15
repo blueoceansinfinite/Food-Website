@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime&display=swap');
+        
+        /* New Subtle and Playful Color Scheme with Coral */
+        :root {
+            --accent-pink: #FF7F50; /* Main Coral */
+            --accent-green: #E26D5A; /* Darker Coral */
+            --accent-orange: #FF916B; /* Brighter Coral */
+            --accent-blue: #C74D3D; /* Deep Coral/Burnt Sienna */
+            --border-color: #5E3023; /* Very Dark Coral */
+            --bg-neutral: #f0f0f0; /* Light Gray */
+            --text-color: #5E3023; /* Dark Text */
+            --secondary-bg: #F5E0D5; /* Light Coral Background */
+        }
+
+        /* Smooth scroll for better feel */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--bg-neutral);
+            font-family: 'Courier Prime', monospace;
+            color: var(--text-color);
+            background-image: radial-gradient(circle at 10% 20%, #E26D5A10 0%, #f5f5f5 100%);
+            transition: background-color 0.5s ease;
+        }
+
+        .brutalist-border {
+            border: 2px solid var(--border-color);
+        }
+
+        .chunky-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        .clashing-text-pink { color: var(--accent-pink); }
+        .clashing-bg-pink { background-color: var(--accent-pink); }
+        .clashing-bg-green { background-color: var(--accent-green); }
+        .clashing-bg-orange { background-color: var(--accent-orange); }
+        .clashing-bg-blue { background-color: var(--accent-blue); }
+
+        .btn-wiggle:hover {
+            animation: wiggle 0.3s infinite;
+        }
+        
+        @keyframes wiggle {
+            0% { transform: scale(1.05); }
+            25% { transform: scale(1.05) rotate(2deg); }
+            50% { transform: scale(1.05) rotate(-2deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="p-8 md:p-12">
+    <!-- Navbar -->
+    <nav class="brutalist-border fixed top-8 left-1/2 -translate-x-1/2 z-50 flex space-x-4 clashing-bg-blue p-4 rounded-xl shadow-2xl">
+        <a href="index.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">HOME</a>
+        <a href="products.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">PRODUCTS</a>
+        <a href="services.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">SERVICES</a>
+        <a href="contact.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">CONTACT</a>
+        <a href="cart.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">CART</a>
+        <a href="reservation.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">RESERVATION</a>
+    </nav>
+    
+    <main class="space-y-24 mt-24">
+        <!-- Cart Section -->
+        <section class="relative brutalist-border bg-secondary-bg p-8 rounded-xl shadow-2xl">
+            <h2 class="chunky-heading text-4xl md:text-6xl mb-8 text-black text-center">Your Cart of Chaos</h2>
+            <div class="mb-4 text-center">
+                <img src="images/cart.png" alt="A hand-drawn icon of a shopping cart with a bold outline" class="mx-auto w-32 h-auto brutalist-border rounded-lg">
+            </div>
+            <div id="cart-content" class="space-y-4">
+                <!-- Cart items will be populated here by JavaScript -->
+            </div>
+            <div id="cart-summary" class="mt-8 space-y-2 border-t-2 border-dashed brutalist-border pt-4">
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">₹ 0.00</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Tax (18%):</span>
+                    <span id="tax">₹ 0.00</span>
+                </div>
+                <div class="flex justify-between font-bold text-3xl chunky-heading clashing-text-blue">
+                    <span>Total:</span>
+                    <span id="total">₹ 0.00</span>
+                </div>
+            </div>
+            <button id="checkout-button" class="mt-8 w-full brutalist-border clashing-bg-blue text-white chunky-heading text-2xl p-4 rounded-xl btn-wiggle">CHECKOUT NOW</button>
+            <p id="empty-cart-message" class="text-center italic mt-8 text-lg hidden">
+                Your cart is empty. Why not fill it with some beautiful messes?
+            </p>
+        </section>
+    </main>
+
+    <script>
+        const cartContent = document.getElementById('cart-content');
+        const subtotalEl = document.getElementById('subtotal');
+        const taxEl = document.getElementById('tax');
+        const totalEl = document.getElementById('total');
+        const checkoutButton = document.getElementById('checkout-button');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('brutalist-cart')) || [];
+            cartContent.innerHTML = '';
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                document.getElementById('cart-summary').classList.add('hidden');
+                checkoutButton.classList.add('hidden');
+                return;
+            }
+
+            emptyCartMessage.classList.add('hidden');
+            document.getElementById('cart-summary').classList.remove('hidden');
+            checkoutButton.classList.remove('hidden');
+
+            const itemCounts = {};
+            cart.forEach(item => {
+                if (itemCounts[item.name]) {
+                    itemCounts[item.name].quantity++;
+                } else {
+                    itemCounts[item.name] = { ...item, quantity: 1 };
+                }
+            });
+
+            for (const name in itemCounts) {
+                const item = itemCounts[name];
+                subtotal += item.price * item.quantity;
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex justify-between items-center brutalist-border p-4 rounded-xl bg-bg-neutral';
+                itemEl.innerHTML = `
+                    <div>
+                        <span class="font-bold text-xl">${item.name}</span>
+                        <span class="text-sm"> x${item.quantity}</span>
+                    </div>
+                    <span class="font-bold text-xl">₹ ${(item.price * item.quantity).toFixed(2)}</span>
+                `;
+                cartContent.appendChild(itemEl);
+            }
+
+            const tax = subtotal * 0.18;
+            const total = subtotal + tax;
+            
+            subtotalEl.textContent = `₹ ${subtotal.toFixed(2)}`;
+            taxEl.textContent = `₹ ${tax.toFixed(2)}`;
+            totalEl.textContent = `₹ ${total.toFixed(2)}`;
+        }
+
+        checkoutButton.addEventListener('click', () => {
+            localStorage.removeItem('brutalist-cart');
+            renderCart();
+            alert("Order placed! Your meal is now in a state of beautiful chaos.");
+        });
+
+        window.onload = renderCart;
+    </script>
+</body>
+</html>

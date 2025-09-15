@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime&display=swap');
+        
+        /* New Subtle and Playful Color Scheme with Coral */
+        :root {
+            --accent-pink: #FF7F50; /* Main Coral */
+            --accent-green: #E26D5A; /* Darker Coral */
+            --accent-orange: #FF916B; /* Brighter Coral */
+            --accent-blue: #C74D3D; /* Deep Coral/Burnt Sienna */
+            --border-color: #5E3023; /* Very Dark Coral */
+            --bg-neutral: #f0f0f0; /* Light Gray */
+            --text-color: #5E3023; /* Dark Text */
+            --secondary-bg: #F5E0D5; /* Light Coral Background */
+        }
+
+        /* Smooth scroll for better feel */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--bg-neutral);
+            font-family: 'Courier Prime', monospace;
+            color: var(--text-color);
+            background-image: radial-gradient(circle at 10% 20%, #E26D5A10 0%, #f5f5f5 100%);
+            transition: background-color 0.5s ease;
+        }
+
+        .brutalist-border {
+            border: 2px solid var(--border-color);
+        }
+
+        .chunky-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        .clashing-text-pink { color: var(--accent-pink); }
+        .clashing-bg-pink { background-color: var(--accent-pink); }
+        .clashing-bg-green { background-color: var(--accent-green); }
+        .clashing-bg-orange { background-color: var(--accent-orange); }
+        .clashing-bg-blue { background-color: var(--accent-blue); }
+
+        .btn-wiggle:hover {
+            animation: wiggle 0.3s infinite;
+        }
+        
+        @keyframes wiggle {
+            0% { transform: scale(1.05); }
+            25% { transform: scale(1.05) rotate(2deg); }
+            50% { transform: scale(1.05) rotate(-2deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="p-8 md:p-12">
+    <!-- Navbar -->
+    <nav class="brutalist-border fixed top-8 left-1/2 -translate-x-1/2 z-50 flex space-x-4 clashing-bg-blue p-4 rounded-xl shadow-2xl">
+        <a href="index.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">HOME</a>
+        <a href="products.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">PRODUCTS</a>
+        <a href="services.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">SERVICES</a>
+        <a href="contact.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">CONTACT</a>
+        <a href="cart.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">CART</a>
+        <a href="reservation.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">RESERVATION</a>
+    </nav>
+    
+    <main class="space-y-24 mt-24">
+        <!-- Menu Section -->
+        <section class="relative brutalist-border bg-secondary-bg p-8 rounded-xl shadow-2xl">
+            <h2 class="chunky-heading text-4xl md:text-6xl mb-8 text-black text-center">OUR MENU</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Appetizers -->
+                <div class="relative brutalist-border p-6 rounded-xl shadow-2xl bg-white space-y-4">
+                    <img src="images/Samosa.png" alt="A single samosa" class="w-full h-auto brutalist-border rounded-lg">
+                    <h3 class="chunky-heading text-2xl">APPETIZERS</h3>
+                    <ul class="space-y-2 text-lg">
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Spicy Samosas</span><span class="font-bold">₹ 99</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Crispy Pakoras</span><span class="font-bold">₹ 120</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Paneer Tikka</span><span class="font-bold">₹ 250</span></li>
+                    </ul>
+                </div>
+
+                <!-- Main Courses -->
+                <div class="relative brutalist-border p-6 rounded-xl shadow-2xl bg-white space-y-4">
+                    <img src="menu icon.jpg" alt="A plate with chicken and vegetables" class="w-full h-auto brutalist-border rounded-lg">
+                    <h3 class="chunky-heading text-2xl">MAIN COURSES</h3>
+                    <ul class="space-y-2 text-lg">
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Butter Chicken</span><span class="font-bold">₹ 450</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Vegetable Biryani</span><span class="font-bold">₹ 380</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Dal Makhani</span><span class="font-bold">₹ 320</span></li>
+                    </ul>
+                </div>
+                
+                <!-- Desserts -->
+                <div class="relative brutalist-border p-6 rounded-xl shadow-2xl bg-white space-y-4">
+                    <img src="images/Gulab Jamun.png" alt="Gulab Jamun dessert" class="w-full h-auto brutalist-border rounded-lg">
+                    <h3 class="chunky-heading text-2xl">DESSERTS</h3>
+                    <ul class="space-y-2 text-lg">
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Gulab Jamun</span><span class="font-bold">₹ 150</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Gajar Halwa</span><span class="font-bold">₹ 180</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Rasmalai</span><span class="font-bold">₹ 190</span></li>
+                    </ul>
+                </div>
+                
+                <!-- Drinks -->
+                <div class="relative brutalist-border p-6 rounded-xl shadow-2xl bg-white space-y-4">
+                    <img src="images/Mango lassi.png" alt="Mango Lassi drink" class="w-full h-auto brutalist-border rounded-lg">
+                    <h3 class="chunky-heading text-2xl">DRINKS</h3>
+                    <ul class="space-y-2 text-lg">
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Mango Lassi</span><span class="font-bold">₹ 120</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Chai</span><span class="font-bold">₹ 80</span></li>
+                        <li class="flex justify-between items-center brutalist-border p-2 rounded-md"><span>Lemonade</span><span class="font-bold">₹ 90</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="mt-24 p-8 brutalist-border clashing-bg-blue text-white rounded-xl shadow-2xl">
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div class="chunky-heading text-xl">
+                &copy; 2024 Chaos Kitchen.
+            </div>
+            <div class="flex space-x-4">
+                <a href="index.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Home</a>
+                <a href="products.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Products</a>
+                <a href="services.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Services</a>
+                <a href="contact.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Contact</a>
+                <a href="cart.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Cart</a>
+                <a href="reservation.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Reservation</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

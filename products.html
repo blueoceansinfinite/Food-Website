@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime&display=swap');
+        
+        /* Light Theme Color Scheme with Coral */
+        :root {
+            --accent-pink: #FF7F50; /* Main Coral */
+            --accent-green: #E26D5A; /* Darker Coral */
+            --accent-orange: #FF916B; /* Brighter Coral */
+            --accent-blue: #C74D3D; /* Deep Coral/Burnt Sienna */
+            --border-color: #5E3023; /* Very Dark Coral */
+            --bg-neutral: #f0f0f0; /* Light Gray */
+            --text-color: #5E3023; /* Dark Text */
+            --secondary-bg: #F5E0D5; /* Light Coral Background */
+        }
+        
+        /* Dark Theme Color Scheme */
+        body.dark-mode {
+            --accent-pink: #FF6600;
+            --accent-green: #00FF33;
+            --accent-orange: #FF6600;
+            --accent-blue: #0033FF;
+            --border-color: #f0f0f0;
+            --bg-neutral: #1a1a1a;
+            --text-color: #f0f0f0;
+            --secondary-bg: #282828;
+        }
+
+        /* Smooth scroll for better feel */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--bg-neutral);
+            font-family: 'Courier Prime', monospace;
+            color: var(--text-color);
+            background-image: radial-gradient(circle at 10% 20%, #E26D5A10 0%, #f5f5f5 100%),
+                              url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJnIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjgiIG51bOctb2N0YXZlcz0iMjAiIHN0aXRjaFRpbGVzPSJub3N0aXRjaCIgc2VlZD0iMjAiLz48ZmVGaWx0ZXIgb3BhY2l0eT0iLjAyIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgZmlsbD0id2hpdGUiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjZyk7Ii8+PC9zdmc+');
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        body.dark-mode {
+            background-image: radial-gradient(circle at 10% 20%, #C74D3D10 0%, #1a1a1a 100%),
+                              url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJnIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjgiIG51bOctb2N0YXZlcz0iMjAiIHN0aXRjaFRpbGVzPSJub3N0aXRjaCIgc2VlZD0iMjAiLz48ZmVGaWx0ZXIgb3BhY2l0eT0iLjAyIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgZmlsbD0iYmxhY2siIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjZyk7Ii8+PC9zdmc+');
+        }
+
+        .brutalist-border {
+            border: 2px solid var(--border-color);
+        }
+
+        .chunky-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        .clashing-text-pink { color: var(--accent-pink); }
+        .clashing-bg-pink { background-color: var(--accent-pink); }
+        .clashing-bg-green { background-color: var(--accent-green); }
+        .clashing-bg-orange { background-color: var(--accent-orange); }
+        .clashing-bg-blue { background-color: var(--accent-blue); }
+
+        .btn-wiggle:hover {
+            animation: wiggle 0.3s infinite;
+        }
+        
+        @keyframes wiggle {
+            0% { transform: scale(1.05); }
+            25% { transform: scale(1.05) rotate(2deg); }
+            50% { transform: scale(1.05) rotate(-2deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1.05); }
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--bg-neutral);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+        }
+
+        .textured-section {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJnIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjgiIG51bOctb2N0YXZlcz0iMjAiIHN0aXRjaFRpbGVzPSJub3N0aXRjaCIgc2VlZD0iMjAiLz48ZmVGaWx0ZXIgb3BhY2l0eT0iLjA3Ii8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgZmlsbD0id2hpdGUiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjZyk7Ii8+PC9zdmc+');
+            background-color: var(--secondary-bg);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+        
+        .contact-image-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .contact-form-wrapper {
+            position: relative;
+            z-index: 20;
+            margin-top: -2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-form-wrapper {
+                margin-top: 0;
+            }
+        }
+
+        /* Star Rating CSS */
+        .rating {
+            display: inline-block;
+        }
+        .rating input {
+            display: none;
+        }
+        .rating label {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .rating input:checked ~ label,
+        .rating input:hover ~ label,
+        .rating label:hover ~ label {
+            color: var(--accent-pink);
+        }
+        /* New card animation classes */
+        .product-card {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            transform: scale(1);
+        }
+
+        .product-card.enlarged {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="p-8 md:p-12">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="fixed top-8 right-8 z-50 p-3 brutalist-border rounded-full shadow-lg clashing-bg-blue text-white btn-wiggle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+    </button>
+    
+    <!-- Navbar -->
+    <nav class="brutalist-border fixed top-8 left-1/2 -translate-x-1/2 z-50 flex space-x-4 clashing-bg-blue p-4 rounded-xl shadow-2xl">
+        <a href="index.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">HOME</a>
+        <a href="products.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">PRODUCTS</a>
+        <a href="services.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">SERVICES</a>
+        <a href="contact.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">CONTACT</a>
+        <a href="cart.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">CART</a>
+        <a href="reservation.html" class="text-xl font-bold hover:text-accent-pink hover:bg-black p-2 rounded-lg transition-colors duration-300 text-white">RESERVATION</a>
+
+        <!-- Cat Profile Icon -->
+        <a href="#" class="chunky-heading text-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-white hover:text-accent-pink transition-colors duration-300">
+                <path d="M11.667 1.25a.75.75 0 0 1 .741.802l-.65 4.331c-.138.92-.375 1.761-.715 2.508a18.337 18.337 0 0 0 2.766 2.373c2.724 1.776 3.447 5.161 1.782 7.202-1.928 2.336-6.49 2.55-8.498.243-1.923-2.203-1.638-6.002 1.096-7.85 1.55-1.077 2.946-1.768 4.02-2.316a1.18 1.18 0 0 1 .46-.225l-.266-1.774-1.35.249a.75.75 0 0 1-.22-.986l.66-1.137a.75.75 0 0 1 .986-.22zM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
+            </svg>
+        </a>
+    </nav>
+    
+    <main class="space-y-24 mt-24">
+        <!-- Products Section -->
+        <section class="brutalist-border rounded-xl shadow-2xl p-8 relative overflow-hidden textured-section">
+            <h2 class="chunky-heading text-4xl md:text-6xl mb-8 text-black text-center">OUR BEAUTIFUL MESSES</h2>
+            <p class="text-center italic mb-8">
+                Every dish is a little bit of chaos, and a whole lot of delicious.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card brutalist-border rounded-lg overflow-hidden shadow-2xl group" data-product-id="thali">
+                    <img src="images/Product page.png" alt="A grand thali platter" class="w-full h-auto object-cover brutalist-border group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-100">
+                        <h3 class="chunky-heading text-2xl group-hover:text-accent-pink transition-colors duration-300">GRAND THALI PLATTER</h3>
+                        <p class="text-lg">A full spectrum of flavors, organized beautifully for your dining pleasure.</p>
+                        <p class="text-xl font-bold mt-2">₹ 899.00</p>
+                        <button class="mt-4 w-full brutalist-border clashing-bg-blue text-white chunky-heading text-xl p-3 rounded-xl btn-wiggle">ADD TO CART</button>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card brutalist-border rounded-lg overflow-hidden shadow-2xl group" data-product-id="samosa">
+                    <img src="images/Samosa.png" alt="A single samosa" class="w-full h-auto object-cover brutalist-border group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-100">
+                        <h3 class="chunky-heading text-2xl group-hover:text-accent-pink transition-colors duration-300">FLAKY SAMOSA TRIANGLE</h3>
+                        <p class="text-lg">A perfect piece of fried chaos. Spicy and crunchy in all the right places.</p>
+                        <p class="text-xl font-bold mt-2">₹ 99.00</p>
+                        <button class="mt-4 w-full brutalist-border clashing-bg-blue text-white chunky-heading text-xl p-3 rounded-xl btn-wiggle">ADD TO CART</button>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card brutalist-border rounded-lg overflow-hidden shadow-2xl group" data-product-id="paneer">
+                    <img src="images/Panner.png" alt="Paneer skewers on a plate" class="w-full h-auto object-cover brutalist-border group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-100">
+                        <h3 class="chunky-heading text-2xl group-hover:text-accent-pink transition-colors duration-300">SPICY PANEER SKEWERS</h3>
+                        <p class="text-lg">Bold and fiery, just like our design philosophy. We dare you to try them.</p>
+                        <p class="text-xl font-bold mt-2">₹ 299.00</p>
+                        <button class="mt-4 w-full brutalist-border clashing-bg-blue text-white chunky-heading text-xl p-3 rounded-xl btn-wiggle">ADD TO CART</button>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card brutalist-border rounded-lg overflow-hidden shadow-2xl group" data-product-id="lassi">
+                    <img src="images/Mango lassi.png" alt="A glass of mango lassi" class="w-full h-auto object-cover brutalist-border group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-100">
+                        <h3 class="chunky-heading text-2xl group-hover:text-accent-pink transition-colors duration-300">MANGO LASSI BLISS</h3>
+                        <p class="text-lg">A creamy, dreamy escape from all the chaos. It's the perfect cool-down.</p>
+                        <p class="text-xl font-bold mt-2">₹ 149.00</p>
+                        <button class="mt-4 w-full brutalist-border clashing-bg-blue text-white chunky-heading text-xl p-3 rounded-xl btn-wiggle">ADD TO CART</button>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="product-card brutalist-border rounded-lg overflow-hidden shadow-2xl group" data-product-id="biryani">
+                    <img src="images/Biryani.png" alt="A biryani bucket" class="w-full h-auto object-cover brutalist-border group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-100">
+                        <h3 class="chunky-heading text-2xl group-hover:text-accent-pink transition-colors duration-300">FIERY BIRYANI BUCKET</h3>
+                        <p class="text-lg">A monumental feast in a surprisingly small bucket. It's a culinary revolution.</p>
+                        <p class="text-xl font-bold mt-2">₹ 499.00</p>
+                        <button class="mt-4 w-full brutalist-border clashing-bg-blue text-white chunky-heading text-xl p-3 rounded-xl btn-wiggle">ADD TO CART</button>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product-card brutalist-border rounded-lg overflow-hidden shadow-2xl group" data-product-id="gulab-jamun">
+                    <img src="images/Gulab Jamun.png" alt="A single Gulab Jamun" class="w-full h-auto object-cover brutalist-border group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-100">
+                        <h3 class="chunky-heading text-2xl group-hover:text-accent-pink transition-colors duration-300">DECADENT GULAB JAMUN</h3>
+                        <p class="text-lg">Small, but perfectly formed. A sweet finale to your chaotic meal.</p>
+                        <p class="text-xl font-bold mt-2">₹ 129.00</p>
+                        <button class="mt-4 w-full brutalist-border clashing-bg-blue text-white chunky-heading text-xl p-3 rounded-xl btn-wiggle">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button id="joke-button" class="brutalist-border clashing-bg-blue text-white chunky-heading text-2xl p-4 rounded-xl btn-wiggle">
+                    CLICK FOR A DAD JOKE
+                </button>
+                <p id="joke-display" class="mt-4 text-xl italic font-bold"></p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const jokeButton = document.getElementById('joke-button');
+        const jokeDisplay = document.getElementById('joke-display');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const productCards = document.querySelectorAll('.product-card');
+
+        const jokes = [
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "I'm reading a book on anti-gravity. It's impossible to put down!",
+            "Did you hear about the restaurant on the moon? Great food, no atmosphere.",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "I told my wife she should embrace her mistakes. She gave me a hug."
+        ];
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Joke Button
+        jokeButton.addEventListener('click', () => {
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            jokeDisplay.textContent = randomJoke;
+        });
+
+        // Add to Cart Logic
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevents the card click from also firing
+                const item = {
+                    name: button.parentElement.querySelector('h3').textContent,
+                    price: parseFloat(button.parentElement.querySelector('p:nth-of-type(2)').textContent.replace('₹ ', ''))
+                };
+
+                let cart = JSON.parse(localStorage.getItem('brutalist-cart')) || [];
+                cart.push(item);
+                localStorage.setItem('brutalist-cart', JSON.stringify(cart));
+            });
+        });
+
+        // Card Click Animation
+        productCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const isCurrentlyEnlarged = card.classList.contains('enlarged');
+                
+                // Remove enlarged class from all cards
+                productCards.forEach(c => c.classList.remove('enlarged'));
+                
+                // If it wasn't enlarged, enlarge it now
+                if (!isCurrentlyEnlarged) {
+                    card.classList.add('enlarged');
+                }
+            });
+        });
+    </script>
+    <footer class="mt-24 p-8 brutalist-border clashing-bg-blue text-white rounded-xl shadow-2xl">
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div class="chunky-heading text-xl">
+                &copy; 2024 Chaos Kitchen.
+            </div>
+            <div class="flex space-x-4">
+                <a href="index.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Home</a>
+                <a href="products.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Products</a>
+                <a href="services.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Services</a>
+                <a href="contact.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Contact</a>
+                <a href="cart.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Cart</a>
+                <a href="reservation.html" class="text-white hover:clashing-text-pink transition-colors duration-300">Reservation</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
